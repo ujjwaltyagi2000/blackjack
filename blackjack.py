@@ -2,6 +2,7 @@ import art
 import random
 
 def choose_card():
+ 
  chosen_card=random.randint(0,12)
  return chosen_card
 
@@ -49,15 +50,17 @@ def calculate_value(chosen_card):
     return value
 
 def dealer_cards():
+   
     print("\n The dealer's cards are: ")
     dealer_card1=choose_card()
     dealer_card2=choose_card()
     print(art.cards[dealer_card1])
     dealer_val=calculate_value(dealer_card1)+calculate_value(dealer_card2)
     # print(dealer_val)
-    return dealer_val
+    return dealer_val,dealer_card1,dealer_card2
 
 def player_cards():
+    
     print("\nYour cards are: ")
     player_card1=choose_card()
     player_card2=choose_card()
@@ -65,3 +68,28 @@ def player_cards():
     player_val=calculate_value(player_card1)+calculate_value(player_card2)
     # print(player_val)
     return player_val
+
+def who_won(dealer_hand,player_hand):
+    
+    if dealer_hand==player_hand:
+        print("\nIt's a draw!")
+            
+    elif dealer_hand<player_hand:
+        print("\nYou won! ")
+            
+    elif dealer_hand>player_hand:
+        print("\nYou lost :(")
+
+def dealer_deal(dealer_hand,dealer_card1,dealer_card2):
+    
+    print("\n The dealer's cards are: ")
+    print(art.cards[dealer_card1],art.cards[dealer_card2])
+    print(f"\nDealer Current Value is: {dealer_hand}")
+    
+    while dealer_hand<=16:
+        dealer_new_card=choose_card()
+        print(art.cards[dealer_new_card])
+        dealer_hand+=calculate_value(dealer_new_card)
+        print(f"\nDealer Current Value is: {dealer_hand}")
+        
+    return dealer_hand
