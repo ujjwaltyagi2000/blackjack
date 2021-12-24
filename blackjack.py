@@ -51,23 +51,31 @@ def calculate_value(chosen_card):
 
 def dealer_cards():
    
-    print("\n The dealer's cards are: ")
-    dealer_card1=choose_card()
-    dealer_card2=choose_card()
-    print(art.cards[dealer_card1])
-    dealer_val=calculate_value(dealer_card1)+calculate_value(dealer_card2)
+    dealer_hand=[]
+    dealer_hand.append(choose_card())
+    dealer_hand.append(choose_card())
+    # dealer_val=calculate_value(dealer_hand[0])+calculate_value(dealer_hand[1])
     # print(dealer_val)
-    return dealer_val,dealer_card1,dealer_card2
+    return dealer_hand
 
 def player_cards():
     
-    print("\nYour cards are: ")
-    player_card1=choose_card()
-    player_card2=choose_card()
-    print(art.cards[player_card1],art.cards[player_card2])
-    player_val=calculate_value(player_card1)+calculate_value(player_card2)
+    player_hand=[]
+    # print("\nYour cards are: ")
+    player_hand.append(choose_card())
+    player_hand.append(choose_card())
+    # print(art.cards[player_hand[0]],art.cards[player_hand[1]])
+    # 
     # print(player_val)
-    return player_val
+    return player_hand
+
+def calculate_score(cards):
+    
+    score=0
+    for card in cards:
+        score+=calculate_value(card)
+
+    return score
 
 def who_won(dealer_hand,player_hand):
     
@@ -80,12 +88,13 @@ def who_won(dealer_hand,player_hand):
     elif dealer_hand>player_hand:
         print("\nYou lost :(")
 
-def dealer_deal(dealer_hand,dealer_card1,dealer_card2):
+def dealer_deal(cards):
     
     print("\n The dealer's cards are: ")
-    print(art.cards[dealer_card1],art.cards[dealer_card2])
-    print(f"\nDealer Current Value is: {dealer_hand}")
+    for card in cards:
+        print(art.cards[card])
     
+    dealer_hand=calculate_score(cards)
     while dealer_hand<=16:
         dealer_new_card=choose_card()
         print(art.cards[dealer_new_card])
