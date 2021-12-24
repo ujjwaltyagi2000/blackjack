@@ -77,15 +77,21 @@ def calculate_score(cards):
 
     return score
 
-def who_won(dealer_hand,player_hand):
+def who_won(dealer_hand,player_hand,dealer_bust,player_bust):
     
     if dealer_hand==player_hand:
         print("\nIt's a draw!")
+
+    elif dealer_bust==True:
+        print("\nIt's a bust. You win! \nCONGRATULATIONS <3")
+
+    elif player_bust==True:
+        print("\nIt's a bust. You lost :(")
             
-    elif dealer_hand<player_hand:
+    elif dealer_hand<player_hand and player_bust==False:
         print("\nYou won! ")
             
-    elif dealer_hand>player_hand:
+    elif dealer_hand>player_hand and dealer_bust==False:
         print("\nYou lost :(")
 
 def dealer_deal(cards):
@@ -102,3 +108,9 @@ def dealer_deal(cards):
         print(f"\nDealer Current Value is: {dealer_hand}")
         
     return dealer_hand
+
+def is_bust(score):
+    bust=False
+    if score>21:
+        bust=True
+    return bust
